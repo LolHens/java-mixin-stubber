@@ -4,6 +4,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
@@ -50,9 +51,12 @@ public class Stubber {
         new ArrayList<>(compilationUnit.getTypes()).stream().filter(filterTypes.negate()).forEach(Node::remove);
 
         compilationUnit.findAll(MethodDeclaration.class).forEach(methodDeclaration -> {
+            boolean isInterface = methodDeclaration.getParentNode().flatMap(e -> e.findFirst(ClassOrInterfaceDeclaration.class))
+                    .filter(ClassOrInterfaceDeclaration::isInterface).isPresent();
+
             if (!filterMethods.test(methodDeclaration)) {
                 methodDeclaration.remove();
-            } else if (!methodDeclaration.isAbstract()) {
+            } else if (!(methodDeclaration.isAbstract() || isInterface)) {
                 methodDeclaration.setBody(unsupportedOperationBlock);
             }
         });
