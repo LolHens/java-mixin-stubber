@@ -3,7 +3,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/de.lolhens/java-mixin-stubber)](https://search.maven.org/artifact/de.lolhens/java-mixin-stubber)
 [![Apache License 2.0](https://img.shields.io/github/license/LolHens/java-mixin-stubber.svg?maxAge=3600)](https://www.apache.org/licenses/LICENSE-2.0)
 
-Removes everything from java source that is not needed for [Mixin's](https://github.com/SpongePowered/Mixin) RefMap generation. This currently includes comments, project specific imports and method bodies.
+Removes everything from java source files that is not needed for [Mixin's](https://github.com/SpongePowered/Mixin) RefMap generation. This currently includes comments, project specific imports and method bodies.
 
 ## Using this to generate a RefMap from src/main/scala in forgegradle
 ```gradle
