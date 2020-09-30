@@ -1,5 +1,5 @@
 organization := "de.lolhens"
-name := "java-stubber"
+name := "java-mixin-stubber"
 version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.13.3"
